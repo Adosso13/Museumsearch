@@ -1,0 +1,6 @@
+{
+    "name": "Project Museumsearch - MySQL",
+    "service": "mysql",
+    "dockerComposeFile": "../../docker-compose.dev.yaml",
+    "workspaceFolder": "/app"
+}

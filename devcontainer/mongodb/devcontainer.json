@@ -1,0 +1,6 @@
+{
+    "name": "Project Museumsearch - MongoDB",
+    "service": "Mongodb",
+    "dockerComposeFile": "../../docker-compose.dev.yaml",
+    "workspaceFolder": "/app"
+}

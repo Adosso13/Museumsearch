@@ -1,0 +1,6 @@
+{
+    "name": "Project server",
+    "service": "server",
+    "dockerComposeFile": "../../docker-compose.dev.yaml",
+    "workspaceFolder": "/app"
+}

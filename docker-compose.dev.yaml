@@ -1,0 +1,43 @@
+services :
+  #base de données
+  #nom du service
+  mysql:
+    #image du service
+    image: mysql:9
+    #ports
+    ports:
+    - 3306:3306
+    #volumes
+    volumes:
+    - ./code/server/mysql:/app
+    - ./mysql-data:/var/lib/mysql
+    #variables d'environnement
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    restart: always
+  server:
+    image: node:9
+    ports: 
+    - 3000:3000
+    volumes:
+    - ./code/server:/app
+    tty: true
+  client:
+    image: node:9
+    ports:
+    - 5173:5173
+    volumes:
+    - ./code/client:/app
+    tty: true
+  mongodb:
+    image: mongo:8
+    ports:
+    - 27018:27017
+    volumes:
+    - ./code/server/mongodb:/app
+    - ./mongodb-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
+    restart: always
+
