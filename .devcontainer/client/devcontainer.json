@@ -2,5 +2,14 @@
     "name": "Project client",
     "service": "client",
     "dockerComposeFile": "../../docker-compose.dev.yaml",
-    "workspaceFolder": "/app"
+    "workspaceFolder": "/app",
+    "customizations": {
+        "vscode": {
+            "extensions": [
+            ],
+            "settings": {
+
+            }
+        }
+    }
 }
