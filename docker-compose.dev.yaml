@@ -16,14 +16,14 @@ services :
       MYSQL_ROOT_PASSWORD: root
     restart: always
   server:
-    image: node:9
+    image: node:23
     ports: 
     - 3000:3000
     volumes:
     - ./code/server:/app
     tty: true
   client:
-    image: node:9
+    image: node:23
     ports:
     - 5173:5173
     volumes:
