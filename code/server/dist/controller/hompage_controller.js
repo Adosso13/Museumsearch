@@ -1,8 +1,12 @@
 class HomepageController {
-    // middleware final lié à la route / en GET
-    get = (req, res) => {
-        return res.send("coucou");
+    index = (req, res) => {
+        /*
+
+        */
+        res.status(200).json({
+            status: 200,
+            message: "Welcome to my API",
+        });
     };
 }
 export default HomepageController;
-//# sourceMappingURL=hompage_controller.js.map

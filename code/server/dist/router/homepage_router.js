@@ -6,9 +6,8 @@ class HomepageRouter {
     // définir la liste des routes contenues dans le routeur
     getRoutesList = () => {
         // création de la route d'accueil en GET en utilisant le préfixe /
-        this.router.get("/", new HomepageController().get);
+        this.router.get("/", new HomepageController().index);
         return this.router;
     };
 }
 export default HomepageRouter;
-//# sourceMappingURL=homepage_router.js.map

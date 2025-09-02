@@ -1,11 +1,16 @@
 import type { Request, Response } from "express";
 
 class HomepageController {
-// middleware final lié à la route / en GET
+	public index = (req: Request, res: Response) => {
+		/*
 
-    public get = (req: Request, res: Response): Response => {
-        return res.send("coucou");
-    };
-    
+        */
+
+		res.status(200).json({
+			status: 200,
+			message: "Welcome to my API",
+		});
+	};
 }
+
 export default HomepageController;

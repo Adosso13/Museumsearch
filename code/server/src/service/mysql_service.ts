@@ -1,25 +1,33 @@
-import mysql, { type Pool } from "mysql2/promise";
+// Promise (promesse)
+// exécution d'un code asynchrome
+
+import mysql, { type PoolConnection } from "mysql2/promise";
+
 class MySQLService {
-// design pattern Singleton : propriété statique stockant l'instance de la classe
-static instance: Pool;
-public connect = async (): Promise<Pool> => {
-// déstructurer les variables d'environnement
-const { MYSQL_HOST, MYSQL_USER, MYSQL_PASSWORD, MYSQL_DATABASE }:
-NodeJS.ProcessEnv = process.env;
-// créer un objet de configuration
-const options = {
-    host: MYSQL_HOST,
-    user: MYSQL_USER,
-    password: MYSQL_PASSWORD,
-    database: MYSQL_DATABASE,
-    namedPlaceholders: true,
-};
-// créer une connexion au serveur MySQL
-// design pattern Singleton : tester si une instance existe déjà
-// si aucune connexion n'existe
-if (!MySQLService.instance) MySQLService.instance = mysql.createPool(options);
-// si une connexion existe déjà
-return MySQLService.instance;
-};
+	// Propriété statique:
+	private static connection: PoolConnection;
+
+	public connect = async () => {
+		// Tester si une connexion n'existe pas
+
+		// Await : à utiliser avec un code asynchrome(promesse)
+		// créer un temps d'attente dans l'exécution du code
+		// récupérer le contenu d'un promesse
+
+		if (!MySQLService.connection) {
+			MySQLService.connection = await mysql
+				.createPool({
+					host: process.env.MYSQL_HOST,
+					user: process.env.MYSQL_USER,
+					password: process.env.MYSQL_PASSWORD,
+					database: process.env.MYSQL_DATABASE,
+					namedPlaceholders: true,
+				})
+				.getConnection();
+		}
+		// Si la connexion existe
+		return MySQLService.connection;
+	};
 }
+
 export default MySQLService;

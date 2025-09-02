@@ -1,6 +1,6 @@
-import type { Request, Response } from "express";
+import type { Response } from "express";
 declare class HomepageController {
-    get: (req: Request, res: Response) => Response;
+    get: (res: Response) => Response;
 }
 export default HomepageController;
 //# sourceMappingURL=hompage_controller.d.ts.map
