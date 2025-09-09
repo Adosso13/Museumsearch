@@ -1,3 +1,5 @@
 import Server from "./core/server.js";
-const server = new Server().createServer();
-server.listen(process.env.PORT);
+// demarer le serveur
+const server = new Server();
+//process.env permet d'acceder aux variables d'environnement
+server.create().listen(process.env.PORT);

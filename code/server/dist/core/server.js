@@ -15,13 +15,17 @@ class Server {
     // définir un routeur pour Express
     router = express.Router();
     constructor() {
-        // lier l'application Express au routeur
+        // d’abord parser le body
+        this.app.use(express.json());
+        // puis brancher le router
         this.app.use(this.router);
         // définir la liste des routeurs
-        this.getRoutersList();
+        this.RoutersList();
+        // accès aux fichiers statiques
+        this.app.use(express.static(`${process.env.ASSET_DIR}`));
     }
     // liste des routeurs
-    getRoutersList = () => {
+    RoutersList = () => {
         // création de la route d'accueil en GET
         this.router.use("/", new HomepageRouter().getRoutesList());
         this.router.use("/artist", new ArtistRouter().getRoutesList());
@@ -33,7 +37,7 @@ class Server {
         this.router.use("/role", new RoleRouter().getRoutesList());
     };
     // créer un serveur Node.js / Express
-    createServer = () => {
+    create = () => {
         return http.createServer(this.app);
     };
 }

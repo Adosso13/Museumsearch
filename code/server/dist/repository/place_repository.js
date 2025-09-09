@@ -75,5 +75,64 @@ class PlaceRepository {
             return error;
         }
     };
+    insert = async (data) => {
+        const connection = await new MySQLService().connect();
+        let sql = `
+			INSERT INTO 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			VALUES
+				(NULL, :name, :image, :date_of_creation, :description, :average_visit_time);
+		`;
+        try {
+            connection.beginTransaction();
+            await connection.execute(sql, data);
+            sql = `SET @id = LAST_INSERT_ID();`;
+            await connection.execute(sql);
+            connection.commit();
+            return { success: true };
+        }
+        catch (error) {
+            connection.rollback();
+            return error;
+        }
+    };
+    update = async (data) => {
+        const connection = await new MySQLService().connect();
+        const sql = `
+			UPDATE 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			SET 
+				name = :name, 
+				image = :image, 
+				date_of_creation = :date_of_creation, 
+				description = :description, 
+				average_visit_time = :average_visit_time
+			WHERE 
+				id = :id;
+		`;
+        try {
+            await connection.execute(sql, data);
+            return { message: "Statut du développeur mis à jour avec succès" };
+        }
+        catch (error) {
+            return error;
+        }
+    };
+    delete = async (data) => {
+        const connection = await new MySQLService().connect();
+        const sql = `
+			DELETE FROM 
+				${process.env.MYSQL_DATABASE}.${this.table}
+			WHERE 
+				id = :id;
+		`;
+        try {
+            await connection.execute(sql, data);
+            return { message: "Suppression du développeur fait avec succès" };
+        }
+        catch (error) {
+            return error;
+        }
+    };
 }
 export default PlaceRepository;

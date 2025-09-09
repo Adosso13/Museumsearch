@@ -44,5 +44,54 @@ class WorkOfArtController {
             data: results,
         });
     };
+    insert = async (req, res) => {
+        const results = await new WorkOfArtRepository().insert(req.body);
+        console.log(req.body);
+        if (results instanceof Error) {
+            res.status(400).json({
+                status: 400,
+                // afficher un simple message pour la production, sinon afficher l'erreur
+                message: process.env.NODE_ENV === "prod" ? "Error" : results,
+            });
+            return;
+        }
+        res.status(201).json({
+            status: 201,
+            message: "Artist cree",
+            data: results,
+        });
+    };
+    update = async (req, res) => {
+        const results = await new WorkOfArtRepository().update(req.body);
+        if (results instanceof Error) {
+            res.status(400).json({
+                status: 400,
+                // afficher un simple message pour la production, sinon afficher l'erreur
+                message: process.env.NODE_ENV === "prod" ? "Error" : results,
+            });
+            return;
+        }
+        res.status(200).json({
+            status: 200,
+            message: "Artist updated",
+            data: results,
+        });
+    };
+    delete = async (req, res) => {
+        const results = await new WorkOfArtRepository().delete(req.body);
+        if (results instanceof Error) {
+            res.status(400).json({
+                status: 400,
+                // afficher un simple message pour la production, sinon afficher l'erreur
+                message: process.env.NODE_ENV === "prod" ? "Error" : results,
+            });
+            return;
+        }
+        res.status(200).json({
+            status: 200,
+            message: "Artist deleted",
+            data: results,
+        });
+    };
 }
 export default WorkOfArtController;

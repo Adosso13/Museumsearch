@@ -8,6 +8,9 @@ class PlaceRouter {
         // création de la route d'accueil en GET en utilisant le préfixe /
         this.router.get("/", new PlaceController().index);
         this.router.get("/:id", new PlaceController().one);
+        this.router.post("/", new PlaceController().insert);
+        this.router.put("/", new PlaceController().update);
+        this.router.delete("/", new PlaceController().delete);
         return this.router;
     };
 }
