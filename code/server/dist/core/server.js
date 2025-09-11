@@ -1,27 +1,28 @@
-// biome-ignore assist/source/organizeImports: <>
 import http from "node:http";
+import cors from "cors";
 import express from "express";
-import HomepageRouter from "../router/homepage_router.js";
 import ArtistRouter from "../router/artist_router.js";
-import WorkOfArtRouter from "../router/workofart_router.js";
-import TypeOfPlaceRouter from "../router/typeofplace_router.js";
-import UserRouter from "../router/user_router.js";
-import TypeOfWorkRouter from "../router/typeofwork_router.js";
+import HomepageRouter from "../router/homepage_router.js";
 import PlaceRouter from "../router/place_router.js";
 import RoleRouter from "../router/role_router.js";
+import TypeOfPlaceRouter from "../router/typeofplace_router.js";
+import TypeOfWorkRouter from "../router/typeofwork_router.js";
+import UserRouter from "../router/user_router.js";
+import WorkOfArtRouter from "../router/workofart_router.js";
 class Server {
     // instancier une application Express
     app = express();
     // définir un routeur pour Express
     router = express.Router();
     constructor() {
-        // d’abord parser le body
+        // 1. Activer le CORS (important que ça soit tôt, pour éviter des blocages navigateur)
+        this.app.use(cors());
+        // 2. Parser le body (avant d'utiliser les routes, sinon req.body sera vide)
         this.app.use(express.json());
-        // puis brancher le router
-        this.app.use(this.router);
-        // définir la liste des routeurs
+        // 3. Définir les routes
         this.RoutersList();
-        // accès aux fichiers statiques
+        this.app.use(this.router);
+        // 4. Servir les fichiers statiques (souvent en dernier, sinon ça peut "voler" des routes API)
         this.app.use(express.static(`${process.env.ASSET_DIR}`));
     }
     // liste des routeurs

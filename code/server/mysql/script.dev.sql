@@ -108,7 +108,7 @@ CREATE TABLE museumsearch_dev.place_user(
     FOREIGN KEY (user_id) REFERENCES user (id)
 );
 
--- Insert pour game 
+-- Insert  
 INSERT INTO museumsearch_dev.role
 VALUES
     -- -- pour la PK utiliser NULL pour l'auto incrémentation

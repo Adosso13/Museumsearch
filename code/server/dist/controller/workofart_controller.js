@@ -1,11 +1,7 @@
 import WorkOfArtRepository from "../repository/workofart_repository.js";
 class WorkOfArtController {
     index = async (req, res) => {
-        // appel d'une méthode d'une classe de dépôt
         const results = await new WorkOfArtRepository().selectAll();
-        // si une erreur est renvoyée par la requête
-        // afficher l'erreur en environnement de développement
-        // afficher un simple message en environnement de production
         if (results instanceof Error) {
             res.status(400).json({
                 status: 400,
@@ -13,21 +9,14 @@ class WorkOfArtController {
             });
             return;
         }
-        /*
-    
-        */
         res.status(200).json({
             status: 200,
-            message: "Welcome tgggggo my API",
+            message: "Welcome to my API",
             data: results,
         });
     };
     one = async (req, res) => {
-        // appel d'une méthode d'une classe de dépôt
         const results = await new WorkOfArtRepository().selectOne(req.params);
-        // si une erreur est renvoyée par la requête
-        // afficher l'erreur en environnement de développement
-        // afficher un simple message en environnement de production
         if (results instanceof Error) {
             res.status(400).json({
                 status: 400,
@@ -35,61 +24,57 @@ class WorkOfArtController {
             });
             return;
         }
-        /*
-    
-        */
         res.status(200).json({
             status: 200,
-            message: "Welcome tgggggo my API",
+            message: "ok",
             data: results,
         });
     };
     insert = async (req, res) => {
         const results = await new WorkOfArtRepository().insert(req.body);
-        console.log(req.body);
+        //console.log(req.body);
         if (results instanceof Error) {
             res.status(400).json({
                 status: 400,
-                // afficher un simple message pour la production, sinon afficher l'erreur
                 message: process.env.NODE_ENV === "prod" ? "Error" : results,
             });
             return;
         }
         res.status(201).json({
             status: 201,
-            message: "Artist cree",
+            message: "jeu cree",
             data: results,
         });
     };
     update = async (req, res) => {
         const results = await new WorkOfArtRepository().update(req.body);
+        console.log(req.body);
         if (results instanceof Error) {
             res.status(400).json({
                 status: 400,
-                // afficher un simple message pour la production, sinon afficher l'erreur
                 message: process.env.NODE_ENV === "prod" ? "Error" : results,
             });
             return;
         }
         res.status(200).json({
             status: 200,
-            message: "Artist updated",
+            message: "WorkOfArt updated",
             data: results,
         });
     };
     delete = async (req, res) => {
         const results = await new WorkOfArtRepository().delete(req.body);
+        console.log(results);
         if (results instanceof Error) {
             res.status(400).json({
                 status: 400,
-                // afficher un simple message pour la production, sinon afficher l'erreur
                 message: process.env.NODE_ENV === "prod" ? "Error" : results,
             });
             return;
         }
         res.status(200).json({
             status: 200,
-            message: "Artist deleted",
+            message: "WorkOfArt deleted",
             data: results,
         });
     };

@@ -81,7 +81,7 @@ class PlaceRepository {
 			INSERT INTO 
 				${process.env.MYSQL_DATABASE}.${this.table}
 			VALUES
-				(NULL, :name, :image, :date_of_creation, :description, :average_visit_time);
+				(NULL, :name, :image, :description, :address, :date_of_creation, :average_visit_time, :type_of_place_id);
 		`;
         try {
             connection.beginTransaction();
@@ -104,9 +104,11 @@ class PlaceRepository {
 			SET 
 				name = :name, 
 				image = :image, 
-				date_of_creation = :date_of_creation, 
 				description = :description, 
-				average_visit_time = :average_visit_time
+				address = :address,
+				date_of_creation = :date_of_creation, 
+				average_visit_time = :average_visit_time,
+				type_of_place_id = :type_of_place_id
 			WHERE 
 				id = :id;
 		`;

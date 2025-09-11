@@ -111,7 +111,7 @@ class WorkOfArtRepository {
 			INSERT INTO 
 				${process.env.MYSQL_DATABASE}.${this.table}
 			VALUES
-				(NULL, :name);
+				(NULL, :name, :image, :date_of_creation, :description, :type_of_work_id, :place_id, :artist_id);
 		`;
 
 		try {
@@ -138,7 +138,13 @@ class WorkOfArtRepository {
 			UPDATE 
 				${process.env.MYSQL_DATABASE}.${this.table}
 			SET 
-				name = :name
+				name = :name, 
+				image = :image, 
+				date_of_creation = :date_of_creation,
+				description = :description, 
+				type_of_work_id = :type_of_work_id, 
+				place_id = :place_id, 
+				artist_id = :artist_id
 			WHERE 
 				id = :id;
 		`;

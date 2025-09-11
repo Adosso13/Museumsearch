@@ -4,8 +4,9 @@ type Place = {
 	id: number;
 	name: string;
 	image: string;
-	date_of_creation: string;
 	description: string;
+	address: string;
+	date_of_creation: string;
 	average_visit_time: string;
 
 	type_of_place_id: number;
